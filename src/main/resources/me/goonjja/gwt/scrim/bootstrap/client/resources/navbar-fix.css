@@ -1,0 +1,24 @@
+body .navbar {
+	font-size: 13px !important;
+}
+
+/* Change the docs' brand */
+body .navbar .brand {
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+	margin-left: 20px !important;
+	float: right !important;
+	font-weight: bold !important;
+	color: #bbb !important;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, .1), 0 0 30px
+		rgba(255, 255, 255, .125) !important;
+	-webkit-transition: all .2s linear !important;
+	-moz-transition: all .2s linear !important;
+	transition: all .2s linear !important;
+}
+
+body .navbar .brand:hover {
+	text-decoration: none !important;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, .1), 0 0 30px
+		rgba(255, 255, 255, .4) !important;
+}

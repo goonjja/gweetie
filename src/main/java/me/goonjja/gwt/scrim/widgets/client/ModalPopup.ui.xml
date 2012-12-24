@@ -1,0 +1,28 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.overrideModal {
+			height: auto;
+			max-height: 600px !important;
+		}
+		
+		.overrideModalBody {
+			max-height: 600px !important;
+		}
+	</ui:style>
+	<g:HTMLPanel ui:field='root'
+		styleName='modal fade in hide {style.overrideModal}'>
+		<div ui:field='header' class="modal-header">
+			<g:Anchor ui:field="closeAnchor" styleName="close">&times;</g:Anchor>
+			<h3 ui:field='title'></h3>
+		</div>
+		<g:HTMLPanel ui:field='body'
+			styleName="modal-body {style.overrideModalBody}">
+
+		</g:HTMLPanel>
+		<g:HTMLPanel ui:field='footer' styleName="modal-footer">
+			<g:Anchor ui:field="okAnchor" styleName="btn btn-primary">OK</g:Anchor>
+		</g:HTMLPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

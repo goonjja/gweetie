@@ -1,0 +1,13 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel ui:field='headerRoot' styleName='navbar navbar-fixed-top'>
+		<div class="navbar-inner">
+			<div class="container">
+				<div ui:field='navbar' class='nav-collapse'>
+					<g:Anchor styleName="brand" ui:field="headAnchor" href="#"></g:Anchor>
+				</div>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 
