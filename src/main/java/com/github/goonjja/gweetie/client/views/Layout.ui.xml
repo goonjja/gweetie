@@ -1,0 +1,37 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:sc="urn:import:com.github.goonjja.gweetie.widgets.client">
+	<ui:style>
+		.style1 {
+			min-height: 500px;
+		}
+	</ui:style>
+	<g:HTMLPanel ui:field="topContainer">
+		<div ui:field="header" />
+		<g:HTMLPanel ui:field="errorPanel" styleName="container"
+			visible='false'>
+			<g:HTMLPanel ui:field="errorContainer" />
+			<h6>
+				<g:Anchor ui:field="closeAlertsAnchor" visible='false'
+					styleName='pull-right btn btn-small btn-info'>Hide all
+					alerts</g:Anchor>
+			</h6>
+		</g:HTMLPanel>
+		<g:SimplePanel ui:field="content" styleName='{style.style1}' />
+		<!-- <saanki:Footer ui:field="footer" /> -->
+
+		<sc:ModalPopup ui:field='notificationPopup' />
+
+		<sc:ModalPopup ui:field='processingPopup' modal="true"
+			popupTitle="Please wait" footerVisible="false" closeButtonVisible="false">
+			<g:HTMLPanel ui:field="defaultProcessingMessage">
+				<div>
+					<p>Processing request...</p>
+				</div>
+				<div class="progress progress-success progress-striped active">
+					<div class="bar" style="width: 100%;"></div>
+				</div>
+			</g:HTMLPanel>
+		</sc:ModalPopup>
+	</g:HTMLPanel>
+</ui:UiBinder> 
