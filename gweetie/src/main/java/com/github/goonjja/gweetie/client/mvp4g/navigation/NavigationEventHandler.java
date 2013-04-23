@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import com.github.goonjja.gweetie.client.mvp4g.AppEventBus;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
@@ -21,9 +21,7 @@ public class NavigationEventHandler extends BaseEventHandler<AppEventBus> {
 	private Map<String, AppPlace> placesHistoryNamesMap = new HashMap<String, AppPlace>();
 	private List<String> placesHistoryNames = new ArrayList<String>();
 	private boolean attached = false;
-
-	@Inject
-	PlacesProvider placesProvider;
+	private PlacesProvider placesProvider;
 
 	private ValueChangeHandler<String> historyWatcher = new ValueChangeHandler<String>() {
 
@@ -33,11 +31,12 @@ public class NavigationEventHandler extends BaseEventHandler<AppEventBus> {
 		}
 	};
 
-	public void onInitializeApplication(String applicationName) {
-		initializeNavigationHandler();
+	@Inject
+	public NavigationEventHandler(PlacesProvider placesProvider) {
+		this.placesProvider = placesProvider;
 	}
 
-	protected void initializeNavigationHandler() {
+	public void onInitializeNavigation() {
 		if (attached)
 			return;
 		attached = true;
@@ -62,6 +61,7 @@ public class NavigationEventHandler extends BaseEventHandler<AppEventBus> {
 	}
 
 	private void handleHistoryChange(String token) {
+		GWT.log(token);
 		for (String historyName : placesHistoryNames) {
 			if (token.startsWith(historyName)) {
 				AppPlace place = placesHistoryNamesMap.get(historyName);

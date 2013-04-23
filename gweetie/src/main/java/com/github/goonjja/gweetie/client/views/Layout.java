@@ -1,7 +1,6 @@
 package com.github.goonjja.gweetie.client.views;
 
-
-
+import com.github.goonjja.gweetie.client.FrameworkUIMessages;
 import com.github.goonjja.gweetie.widgets.client.ModalPopup;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
@@ -32,8 +31,6 @@ public class Layout extends Composite {
 	HTMLPanel errorPanel;
 	@UiField
 	HTMLPanel errorContainer;
-	@UiField
-	Anchor closeAlertsAnchor;
 
 	@UiField
 	SimplePanel content;
@@ -65,13 +62,6 @@ public class Layout extends Composite {
 		initWidget(binder.createAndBindUi(this));
 
 		hideAlerts();
-		closeAlertsAnchor.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				hideAlerts();
-			}
-		});
 
 		notificationPopup.getOkAnchor().addClickHandler(new ClickHandler() {
 
@@ -86,7 +76,7 @@ public class Layout extends Composite {
 		content.setWidget(view);
 	}
 
-	public void setHeader(Header header) {
+	public void setHeader(Widget header) {
 		topContainer.addAndReplaceElement(header.asWidget(), this.header);
 	}
 
@@ -99,7 +89,9 @@ public class Layout extends Composite {
 	}
 
 	public void loadDefaultMessage() {
-		getProcessingPopup().setMessage("<div><p>Processing request...</p></div>" + PROCESSING_PROGRESSBAR_HTML);
+		getProcessingPopup().setMessage(
+				"<div><p>" + FrameworkUIMessages.INSTANCE.processingRequest() + "</p></div>"
+						+ PROCESSING_PROGRESSBAR_HTML);
 	}
 
 	public void showError(final String message) {
@@ -152,12 +144,12 @@ public class Layout extends Composite {
 	}
 
 	public native static void initAlert()/*-{
-		$wnd.$(".alert").alert();
-	}-*/;
+											$wnd.$(".alert").alert();
+											}-*/;
 
 	public native static void closeAlert(String id)/*-{
-		$wnd.$("#" + id).alert('close');
-	}-*/;
+													$wnd.$("#" + id).alert('close');
+													}-*/;
 
 	private void closeAlert(Widget widgetToHide) {
 		if (widgetToHide == null || widgetToHide.getParent() == null)

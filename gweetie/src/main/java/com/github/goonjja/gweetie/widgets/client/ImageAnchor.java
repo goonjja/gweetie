@@ -10,7 +10,7 @@ public class ImageAnchor extends Anchor {
 	public void setResource(ImageResource imageResource) {
 		Image img = new Image(imageResource);
 		// img.setStyleName("navbarimg");
-		DOM.insertChild(getElement(), img.getElement(), 0);
+		DOM.insertBefore(getElement(), img.getElement(), DOM.getFirstChild(getElement()));
 	}
 
 	public void setRel(String rel) {

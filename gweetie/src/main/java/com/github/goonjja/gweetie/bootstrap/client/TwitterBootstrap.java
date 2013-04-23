@@ -1,16 +1,12 @@
 package com.github.goonjja.gweetie.bootstrap.client;
 
-import java.util.logging.Logger;
-
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 
 public class TwitterBootstrap implements EntryPoint {
-	Logger log = Logger.getLogger("TwitterBootstrap");
-
 	@Override
 	public void onModuleLoad() {
 		ResourceInjector.configure();
-		log.info("Resources loaded");
+		GWT.log("Twitter Bootstrap and Jquery resources are loaded");
 	}
-
 }

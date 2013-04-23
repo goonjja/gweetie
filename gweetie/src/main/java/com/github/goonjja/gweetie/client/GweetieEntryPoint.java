@@ -1,10 +1,6 @@
 package com.github.goonjja.gweetie.client;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-
-import com.github.goonjja.gweetie.client.mvp4g.AppEventBus;
+import com.github.goonjja.gweetie.client.mvp4g.AppRootEventBus;
 import com.github.goonjja.gweetie.client.util.JSUtils;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -20,29 +16,26 @@ import com.mvp4g.client.Mvp4gModule;
  * @author vedernikov
  * @date 21.09.2012
  */
-public abstract class AppEntryPoint implements EntryPoint {
-
-	Logger log = Logger.getLogger("Scrim");
-
+public abstract class GweetieEntryPoint implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
 
 			@Override
 			public void onUncaughtException(Throwable e) {
-				log.log(Level.SEVERE, "Uncaught exception:", e);
+				GWT.log("Uncaught exception:", e);
 			}
 		});
-		initializeApplication();
+		startApplication();
 	}
 
-	private void initializeApplication() {
+	protected final void startApplication() {
 		Mvp4gModule module = (Mvp4gModule) GWT.create(Mvp4gModule.class);
 		module.createAndStartModule();
 
 		// init layout if not initialized before (load header, etc)
-		((AppEventBus) module.getEventBus()).initializeApplication(getApplicationName());
-		((AppEventBus) module.getEventBus()).dispatch(getApplicationStartEventName());
+		((AppRootEventBus) module.getEventBus()).initializeNavigation();
+		((AppRootEventBus) module.getEventBus()).initializeApplication();
 
 		// load start view (Layout)
 		RootPanel.get().add((Widget) module.getStartView());
@@ -54,8 +47,4 @@ public abstract class AppEntryPoint implements EntryPoint {
 		JSUtils.initPopovers();
 		JSUtils.initTooltips();
 	}
-
-	protected abstract String getApplicationName();
-
-	protected abstract String getApplicationStartEventName();
 }

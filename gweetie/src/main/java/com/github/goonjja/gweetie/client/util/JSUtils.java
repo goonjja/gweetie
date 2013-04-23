@@ -12,12 +12,12 @@ public class JSUtils {
 	public static native void initTooltips()
 	/*-{
 		$wnd.$(function() {
-			$wnd.$('a[rel=tooltip]').tooltip();
+			//$wnd.$('a[rel=tooltip]').tooltip();
 		});
 	}-*/;
 
 	public static native void hideTooltips()/*-{
-		$wnd.$('a[rel=tooltip]').tooltip('hide');
+		//$wnd.$('a[rel=tooltip]').tooltip('hide');
 	}-*/;
 
 	public static native void copyToClipboardFrom(String data) /*-{

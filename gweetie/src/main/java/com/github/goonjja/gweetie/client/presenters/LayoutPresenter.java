@@ -1,12 +1,15 @@
 package com.github.goonjja.gweetie.client.presenters;
 
+import javax.inject.Singleton;
 
-
+import com.github.goonjja.gweetie.client.FrameworkUIMessages;
+import com.github.goonjja.gweetie.client.events.MessageHandler;
+import com.github.goonjja.gweetie.client.events.MessageType;
 import com.github.goonjja.gweetie.client.mvp4g.AppEventBus;
 import com.github.goonjja.gweetie.client.mvp4g.navigation.AppPlace;
 import com.github.goonjja.gweetie.client.util.JSUtils;
-import com.github.goonjja.gweetie.client.views.Header;
 import com.github.goonjja.gweetie.client.views.Layout;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.BasePresenter;
@@ -17,20 +20,26 @@ import com.mvp4g.client.presenter.BasePresenter;
  * @author Ведерников Сергей
  * 
  */
-@Presenter(view = Layout.class)
-public class LayoutPresenter extends BasePresenter<Layout, AppEventBus> {
+@Singleton
+@Presenter(view = Layout.class, multiple = false)
+public class LayoutPresenter extends BasePresenter<Layout, AppEventBus> implements MessageHandler {
 	// private boolean layout_initialized = false;
+
+	public LayoutPresenter() {
+		super();
+		GWT.log("New instance of layout presenter");
+	}
 
 	public void onStart() {
 	}
 
 	public void onPageNotFound() {
-		view.getNotificationPopup().setPopupTitle("Page not found");
-		view.getNotificationPopup().setMessage("URL specified is invalid, or link is broken");
+		view.getNotificationPopup().setPopupTitle(FrameworkUIMessages.INSTANCE.pageNotFoundMessageTitle());
+		view.getNotificationPopup().setMessage(FrameworkUIMessages.INSTANCE.pageNotFoundMessageText());
 		view.getNotificationPopup().show();
 	}
 
-	public void onSetHeader(Header header) {
+	public void onSetHeader(Widget header) {
 		view.setHeader(header);
 	}
 
@@ -39,20 +48,20 @@ public class LayoutPresenter extends BasePresenter<Layout, AppEventBus> {
 		eventBus.hideProcessing();
 
 		JSUtils.initTooltips();
-		eventBus.hideAlerts();
+		eventBus.hideMessages();
 	}
 
 	public void onNavigated(AppPlace place) {
 		JSUtils.hidePopovers();
 		JSUtils.hideTooltips();
-		eventBus.hideAlerts();
+		eventBus.hideMessages();
 	}
 
 	public void onShowProcessing(String title, String message) {
 		if (title != null)
 			view.getProcessingPopup().setPopupTitle(title);
 		else
-			view.getProcessingPopup().setPopupTitle("Please wait");
+			view.getProcessingPopup().setPopupTitle(FrameworkUIMessages.INSTANCE.pleaseWait());
 		if (message != null)
 			view.getProcessingPopup().setMessage(message);
 		else
@@ -65,19 +74,22 @@ public class LayoutPresenter extends BasePresenter<Layout, AppEventBus> {
 	}
 
 	public void onErrorOnLoad(Throwable reason) {
-		eventBus.showError("Cannot load child module. Reason: " + reason.getMessage());
+		eventBus.showMessage(MessageType.ERROR,
+				FrameworkUIMessages.INSTANCE.childModuleLoadingError() + " " + reason.getMessage());
 	}
 
-	public void onShowError(String message) {
-		view.showError(message);
-		JSUtils.scrollToTop();
+	@Override
+	public void onShowMessage(MessageType type, String message) {
+		if (type == MessageType.ERROR) {
+			view.showError(message);
+			JSUtils.scrollToTop();
+		} else {
+			view.showSuccess(message);
+		}
 	}
 
-	public void onShowSuccess(String message) {
-		view.showSuccess(message);
-	}
-
-	public void onHideAlerts() {
+	@Override
+	public void onHideMessages() {
 		view.hideAlerts();
 	}
 }

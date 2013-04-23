@@ -18,4 +18,7 @@ public interface BootstrapResources extends ClientBundle {
 
 	@Source("bootstrap.min.js")
 	TextResource bootstrapJs();
+	
+	@Source("jquery-2.0.0.min.js")
+	TextResource jqueryJs();
 }

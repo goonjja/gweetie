@@ -15,7 +15,7 @@
 		styleName='modal fade in hide {style.overrideModal}'>
 		<div ui:field='header' class="modal-header">
 			<g:Anchor ui:field="closeAnchor" styleName="close">&times;</g:Anchor>
-			<h3 ui:field='title'></h3>
+			<strong><p ui:field='title'></p></strong>
 		</div>
 		<g:HTMLPanel ui:field='body'
 			styleName="modal-body {style.overrideModalBody}">

@@ -9,11 +9,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-/**
- * 
- * @author vedernikov
- * @date 21.12.2012
- */
 public class Header extends Composite {
 
 	private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);

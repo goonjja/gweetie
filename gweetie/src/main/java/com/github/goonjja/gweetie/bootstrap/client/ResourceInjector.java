@@ -1,8 +1,7 @@
 package com.github.goonjja.gweetie.bootstrap.client;
 
-
-
 import com.github.goonjja.gweetie.bootstrap.client.resources.BootstrapResources;
+import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.HeadElement;
@@ -17,17 +16,20 @@ import com.google.gwt.dom.client.StyleInjector;
  */
 public class ResourceInjector {
 	public static void configure() {
-		injectJs(BootstrapResources.INSTANCE.bootstrapJs().getText());
+		injectJs(getBody(), BootstrapResources.INSTANCE.jqueryJs().getText(), true);
+		injectJs(getBody(), BootstrapResources.INSTANCE.bootstrapJs().getText(), true);
 		StyleInjector.inject(BootstrapResources.INSTANCE.bootstrapCss().getText());
 		StyleInjector.inject(BootstrapResources.INSTANCE.bootstrapResponsiveCss().getText());
 		StyleInjector.inject(BootstrapResources.INSTANCE.navBarFixCss().getText());
 	}
 
-	private static void injectJs(String javascript) {
-		HeadElement head = getHead();
+	private static void injectJs(Element container, String javascript, boolean insertFirst) {
 		ScriptElement element = createScriptElement();
 		element.setText(javascript);
-		head.appendChild(element);
+		if (insertFirst)
+			container.insertFirst(element);
+		else
+			container.appendChild(element);
 	}
 
 	private static ScriptElement createScriptElement() {
@@ -37,6 +39,7 @@ public class ResourceInjector {
 	}
 
 	private static HeadElement head;
+	private static BodyElement body;
 
 	/**
 	 * Gets the document header.
@@ -51,5 +54,15 @@ public class ResourceInjector {
 			ResourceInjector.head = head;
 		}
 		return ResourceInjector.head;
+	}
+
+	protected static BodyElement getBody() {
+		if (body == null) {
+			Element element = Document.get().getElementsByTagName("body").getItem(0);
+			assert element != null : "HTML body element required";
+			BodyElement body = BodyElement.as(element);
+			ResourceInjector.body = body;
+		}
+		return ResourceInjector.body;
 	}
 }
