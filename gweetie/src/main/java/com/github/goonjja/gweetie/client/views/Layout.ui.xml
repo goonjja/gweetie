@@ -21,7 +21,6 @@
 			<g:HTMLPanel ui:field="errorContainer" />
 		</g:HTMLPanel>
 		<g:SimplePanel ui:field="content" styleName='{style.style1}' />
-		<!-- <saanki:Footer ui:field="footer" /> -->
 
 		<sc:ModalPopup ui:field='notificationPopup' />
 

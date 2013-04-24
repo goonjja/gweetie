@@ -1,6 +1,6 @@
 package com.github.goonjja.gweetie.demo.client;
 
-import com.github.goonjja.gweetie.client.mvp4g.navigation.AppPlace;
+import com.github.goonjja.gweetie.client.mvp4g.navigation.GweetiePlace;
 
 /**
  * Mapping beetween mvp4g modules and hisotry tokens (event names). Contains all
@@ -9,8 +9,8 @@ import com.github.goonjja.gweetie.client.mvp4g.navigation.AppPlace;
  * @author Ведерников Сергей
  * 
  */
-public enum Places implements AppPlace {
-	Home(Names.ROOT_MODULE, Names.MAIN_PAGE_PLACE);
+public enum Places implements GweetiePlace {
+	Home(Names.ROOT_MODULE, Names.MAIN_PAGE_PLACE), ChildRoot(Names.CHILD_MODULE, Names.CHILD_ROOT_PLACE);
 
 	public static final class Names {
 		private Names() {
@@ -18,7 +18,11 @@ public enum Places implements AppPlace {
 
 		public final static String ROOT_MODULE = "";
 
+		public final static String CHILD_MODULE = "child";
+
 		public final static String MAIN_PAGE_PLACE = "";
+
+		public final static String CHILD_ROOT_PLACE = "root";
 	}
 
 	/*

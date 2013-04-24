@@ -5,35 +5,36 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.github.goonjja.gweetie.client.mvp4g.AppEventBus;
+import com.github.goonjja.gweetie.client.core.MessageType;
+import com.github.goonjja.gweetie.client.mvp4g.ChildModuleEventBus;
 import com.google.gwt.user.client.History;
 import com.google.inject.Inject;
 import com.mvp4g.client.annotation.History.HistoryConverterType;
 import com.mvp4g.client.history.HistoryConverter;
 
 @com.mvp4g.client.annotation.History(type = HistoryConverterType.SIMPLE)
-public class AppHistoryConverter implements HistoryConverter<AppEventBus> {
+public class GweetieHistoryConverter implements HistoryConverter<ChildModuleEventBus> {
 	private Logger log = Logger.getLogger("HistoryConverter");
 
-	private AppPlace currentPlace = null;
+	private GweetiePlace currentPlace = null;
 	private TokenGenerator tokenGenerator;
 	private PlacesProvider placesProvider;
 
-	private static Map<String, Map<String, AppPlace>> places = new HashMap<String, Map<String, AppPlace>>();
+	private static Map<String, Map<String, GweetiePlace>> places = new HashMap<String, Map<String, GweetiePlace>>();
 
 	@Inject
-	public AppHistoryConverter(TokenGenerator tokenGenerator, PlacesProvider placesProvider) {
+	public GweetieHistoryConverter(TokenGenerator tokenGenerator, PlacesProvider placesProvider) {
 		this.tokenGenerator = tokenGenerator;
 		this.placesProvider = placesProvider;
-		for (AppPlace place : getPlaces()) {
+		for (GweetiePlace place : getPlaces()) {
 			if (places.get(place.getModule()) == null)
-				places.put(place.getModule(), new HashMap<String, AppPlace>());
+				places.put(place.getModule(), new HashMap<String, GweetiePlace>());
 			places.get(place.getModule()).put(place.getHistoryName(), place);
 			log.info("Initialized place: " + place.getModule() + "/" + place.getHistoryName());
 		}
 	}
 
-	protected AppPlace[] getPlaces() {
+	protected GweetiePlace[] getPlaces() {
 		return placesProvider.getPlaces();
 	}
 
@@ -49,7 +50,7 @@ public class AppHistoryConverter implements HistoryConverter<AppEventBus> {
 
 	// this method works only if all events has String arguments or no
 	// arguments
-	public void convertFromToken(String eventName, String param, AppEventBus eventBus) {
+	public void convertFromToken(String eventName, String param, ChildModuleEventBus eventBus) {
 		log.info("Convert from token event name:" + eventName);
 		currentPlace = getPlace(eventBus.getHistory().getToken(), eventName);
 
@@ -59,17 +60,15 @@ public class AppHistoryConverter implements HistoryConverter<AppEventBus> {
 			try {
 				eventBus.dispatch(eventName, tokenMap.values().toArray(new Object[] {}));
 			} catch (Exception e) {
-				// eventBus.applicationError(e.getMessage());
-				// TODO ERROR
+				eventBus.showMessage(MessageType.ERROR, e.getMessage());
 				log.log(Level.SEVERE, e.getMessage(), e);
 			}
 		} else {
-			// eventBus.applicationError("Unknown location: " + eventName);
-			// TODO ERROR
+			eventBus.showMessage(MessageType.ERROR, "Unknown location: " + eventName);
 		}
 	}
 
-	private AppPlace getPlace(String token, String eventName) {
+	private GweetiePlace getPlace(String token, String eventName) {
 		for (String moduleName : places.keySet()) {
 			if (moduleName.isEmpty())// skip root module
 				continue;

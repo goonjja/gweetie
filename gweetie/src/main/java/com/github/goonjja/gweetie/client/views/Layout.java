@@ -49,15 +49,6 @@ public class Layout extends Composite {
 	@UiField
 	HTMLPanel defaultProcessingMessage;
 
-	// @UiField
-	// Anchor feedbackAnchor;
-	// @UiField
-	// HTMLPanel feedbackPanel;
-	// @UiField
-	// Anchor sendFeedbackAnchor;
-	// @UiField
-	// Anchor closeFeedbackAnchor;
-
 	public Layout() {
 		initWidget(binder.createAndBindUi(this));
 
@@ -84,12 +75,12 @@ public class Layout extends Composite {
 		return notificationPopup;
 	}
 
-	public ModalPopup getProcessingPopup() {
+	public ModalPopup getBusyPopup() {
 		return processingPopup;
 	}
 
-	public void loadDefaultMessage() {
-		getProcessingPopup().setMessage(
+	public void loadDefaultBusyMessage() {
+		getBusyPopup().setMessage(
 				"<div><p>" + FrameworkUIMessages.INSTANCE.processingRequest() + "</p></div>"
 						+ PROCESSING_PROGRESSBAR_HTML);
 	}
@@ -143,13 +134,15 @@ public class Layout extends Composite {
 		errorContainer.clear();
 	}
 
-	public native static void initAlert()/*-{
-											$wnd.$(".alert").alert();
-											}-*/;
+	public native static void initAlert()
+	/*-{
+		$wnd.$(".alert").alert();
+	}-*/;
 
-	public native static void closeAlert(String id)/*-{
-													$wnd.$("#" + id).alert('close');
-													}-*/;
+	public native static void closeAlert(String id)
+	/*-{
+		$wnd.$("#" + id).alert('close');
+	}-*/;
 
 	private void closeAlert(Widget widgetToHide) {
 		if (widgetToHide == null || widgetToHide.getParent() == null)

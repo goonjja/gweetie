@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.github.goonjja.gweetie.client.mvp4g.AppEventBus;
+import com.github.goonjja.gweetie.client.mvp4g.ChildModuleEventBus;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -17,8 +17,8 @@ import com.mvp4g.client.annotation.EventHandler;
 import com.mvp4g.client.event.BaseEventHandler;
 
 @EventHandler
-public class NavigationEventHandler extends BaseEventHandler<AppEventBus> {
-	private Map<String, AppPlace> placesHistoryNamesMap = new HashMap<String, AppPlace>();
+public class HistoryChangeHandler extends BaseEventHandler<ChildModuleEventBus> {
+	private Map<String, GweetiePlace> placesHistoryNamesMap = new HashMap<String, GweetiePlace>();
 	private List<String> placesHistoryNames = new ArrayList<String>();
 	private boolean attached = false;
 	private PlacesProvider placesProvider;
@@ -32,16 +32,16 @@ public class NavigationEventHandler extends BaseEventHandler<AppEventBus> {
 	};
 
 	@Inject
-	public NavigationEventHandler(PlacesProvider placesProvider) {
+	public HistoryChangeHandler(PlacesProvider placesProvider) {
 		this.placesProvider = placesProvider;
 	}
 
-	public void onInitializeNavigation() {
+	public void onInitializeHistoryChangeHandler() {
 		if (attached)
 			return;
 		attached = true;
-		for (AppPlace place : getPlaces()) {
-			String historyName = AppPlace.Util.getHistoryItemFor(place);
+		for (GweetiePlace place : getPlaces()) {
+			String historyName = GweetiePlace.Util.getHistoryItemFor(place);
 			placesHistoryNames.add(historyName);
 			placesHistoryNamesMap.put(historyName, place);
 		}
@@ -61,21 +61,17 @@ public class NavigationEventHandler extends BaseEventHandler<AppEventBus> {
 	}
 
 	private void handleHistoryChange(String token) {
-		GWT.log(token);
+		GWT.log("History change: " + token);
 		for (String historyName : placesHistoryNames) {
 			if (token.startsWith(historyName)) {
-				AppPlace place = placesHistoryNamesMap.get(historyName);
-				navigated(place);
+				GweetiePlace place = placesHistoryNamesMap.get(historyName);
+				eventBus.navigated(place);
 				return;
 			}
 		}
 	}
 
-	protected void navigated(AppPlace place) {
-		eventBus.navigated(place);
-	}
-
-	protected AppPlace[] getPlaces() {
+	protected GweetiePlace[] getPlaces() {
 		return placesProvider.getPlaces();
 	}
 }

@@ -10,5 +10,5 @@ package com.github.goonjja.gweetie.client.mvp4g.navigation;
  * @date 21.09.2012
  */
 public interface PlacesProvider {
-	AppPlace[] getPlaces();
+	GweetiePlace[] getPlaces();
 }

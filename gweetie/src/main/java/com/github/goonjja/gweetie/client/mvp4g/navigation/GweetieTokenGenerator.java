@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
 
-public class AppTokenGenerator implements TokenGenerator {
+public class GweetieTokenGenerator implements TokenGenerator {
 
 	public String getTokenValue(String token) {
 		String[] result = token.split("=");

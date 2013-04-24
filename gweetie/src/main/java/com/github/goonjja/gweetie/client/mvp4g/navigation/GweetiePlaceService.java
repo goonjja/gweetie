@@ -8,7 +8,7 @@ import com.mvp4g.client.history.PlaceService;
  * @author Ведерников Сергей
  * 
  */
-public class AppPlaceService extends PlaceService {
+public class GweetiePlaceService extends PlaceService {
 
 	@Override
 	public String tokenize(String eventName, String param) {

@@ -7,7 +7,7 @@ package com.github.goonjja.gweetie.client.mvp4g.navigation;
  * @author Ведерников Сергей
  * @date 20.04.2012
  */
-public interface AppPlace {
+public interface GweetiePlace {
 	String getModule();
 
 	String getHistoryName();
@@ -23,7 +23,7 @@ public interface AppPlace {
 		 * With slash at the end. Example: root place "Contacts", getLink will
 		 * return #Contacts/
 		 */
-		public static String getLink(AppPlace place) {
+		public static String getLink(GweetiePlace place) {
 			return "#" + getHistoryItemFor(place);
 		}
 
@@ -32,7 +32,7 @@ public interface AppPlace {
 		 * place name. With slash at the end. Example: root place "Contacts",
 		 * getLink will return Contacts/
 		 */
-		public static String getHistoryItemFor(AppPlace place) {
+		public static String getHistoryItemFor(GweetiePlace place) {
 			if (place.getModule().equals("")) {
 				if (place.getHistoryName().isEmpty())
 					return "";
