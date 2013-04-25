@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.4.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.4.0/distro-source/core/src/gwt-module.dtd">
 <module rename-to='gweetie'>
+	<source path="core"/>
 	<!-- Inherit the core Web Toolkit stuff with Mvp4G (includes GIN). -->
 	<inherits name="com.google.gwt.user.User" />
-	<inherits name="com.google.gwt.resources.Resources" />
-
 	<inherits name='com.mvp4g.Mvp4gModule' />
-
-	<inherits name="com.github.goonjja.gweetie.bootstrap.TwitterBootstrap" />
-	<inherits name="com.github.goonjja.gweetie.widgets.Widgets" />
-
-	<inherits name="com.google.gwt.i18n.I18N" />
+	<inherits name="com.github.goonjja.gweetie.TwitterBootstrap" />
+	<inherits name="com.github.goonjja.gweetie.Widgets" />
 </module>

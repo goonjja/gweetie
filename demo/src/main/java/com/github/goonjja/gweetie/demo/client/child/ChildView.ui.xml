@@ -5,6 +5,13 @@
 		
 	</ui:style>
 	<g:HTMLPanel>
-	123
+		<div class='container'>
+			<div class='span2' rel='popover' data-placement='bottom' data-content='Popover is here!'
+				data-title='OBEY' data-trigger='hover'>
+				<p>
+					Yep, this is child.
+				</p>
+			</div>
+		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

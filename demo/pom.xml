@@ -28,6 +28,7 @@
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-dev</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
@@ -118,8 +119,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
 				<configuration>
 					<warName>GweetieDemo</warName>
+					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
 					<webappDirectory>${webappDirectory}</webappDirectory>
 				</configuration>
 			</plugin>

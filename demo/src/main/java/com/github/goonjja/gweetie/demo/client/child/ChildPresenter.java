@@ -4,9 +4,9 @@ import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.BasePresenter;
 
 @Presenter(view = ChildView.class)
-public class ChildPresenter extends BasePresenter<ChildView, ChildBus>{
+public class ChildPresenter extends BasePresenter<ChildView, ChildBus> {
 
-	public void onShowChild(){
-		eventBus.setView(getView());
+	public void onShowChild() {
+		eventBus.loadView(null, getView());
 	}
 }

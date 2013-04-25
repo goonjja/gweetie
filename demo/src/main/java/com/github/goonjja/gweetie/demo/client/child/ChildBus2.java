@@ -6,24 +6,17 @@ import com.github.goonjja.gweetie.core.util.Mvp4gLogger;
 import com.github.goonjja.gweetie.demo.client.GinModule;
 import com.github.goonjja.gweetie.demo.client.navigation.Places;
 import com.mvp4g.client.annotation.Debug;
-import com.mvp4g.client.annotation.Debug.LogLevel;
 import com.mvp4g.client.annotation.Event;
 import com.mvp4g.client.annotation.Events;
-import com.mvp4g.client.annotation.module.ChildModule;
-import com.mvp4g.client.annotation.module.ChildModules;
+import com.mvp4g.client.annotation.Debug.LogLevel;
 
-@ChildModules(@ChildModule(moduleClass = SubModule2.class, async = true, autoDisplay = false))
-@Events(startPresenter = ChildPresenter.class, module = SubModule.class, ginModules = GinModule.class)
+@Events(startPresenter = SecondPresenter.class, module = SubModule2.class, ginModules = GinModule.class)
 @Debug(logger = Mvp4gLogger.class, logLevel = LogLevel.DETAILED)
-public interface ChildBus extends GweetieChildEventBus {
-
+public interface ChildBus2 extends GweetieChildEventBus{
 	@Event(
-			handlers = ChildPresenter.class,
+			handlers = SecondPresenter.class,
 			navigationEvent = true,
 			historyConverter = GweetieHistoryConverter.class,
-			name = Places.Names.CHILD_ROOT_PLACE)
-	void showChild();
-
-	@Event(forwardToModules = SubModule2.class)
+			name = Places.Names.CHILD_VIEW2_PLACE)
 	void goToView2(String param);
 }
