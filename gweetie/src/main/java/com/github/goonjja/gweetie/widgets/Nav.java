@@ -16,8 +16,7 @@ import com.google.gwt.view.client.SelectionChangeEvent.HasSelectionChangedHandle
 
 public class Nav extends Composite implements HasWidgets, HasSelectionChangedHandlers {
 	public static enum Type {
-		pills, tabs, list, stackedtabs, stackedpills
-
+		simple, pills, tabs, list, stackedtabs, stackedpills
 	}
 
 	private static NavUiBinder uiBinder = GWT.create(NavUiBinder.class);
@@ -47,6 +46,10 @@ public class Nav extends Composite implements HasWidgets, HasSelectionChangedHan
 
 	public void add(String text, String value) {
 		add(new NavItem(text, value));
+	}
+
+	public void add(String href, String text, String value) {
+		add(new NavItem(href, text, value));
 	}
 
 	@Override
@@ -165,7 +168,9 @@ public class Nav extends Composite implements HasWidgets, HasSelectionChangedHan
 			realType = Type.valueOf(_type);
 		} catch (IllegalArgumentException e) {
 		}
-		if (realType == Type.pills) {
+		if (realType == Type.simple) {
+			ul.setStyleName("nav");
+		} else if (realType == Type.pills) {
 			ul.setStyleName("nav nav-pills");
 		} else if (realType == Type.tabs) {
 			ul.setStyleName("nav nav-tabs");

@@ -1,8 +1,8 @@
 package com.github.goonjja.gweetie.demo.client.navigation;
 
 import com.github.goonjja.gweetie.core.navigation.GweetiePlace;
-import com.github.goonjja.gweetie.demo.client.child.SubModule;
-import com.github.goonjja.gweetie.demo.client.child.SubModule2;
+import com.github.goonjja.gweetie.demo.client.core.DashboardModule;
+import com.github.goonjja.gweetie.demo.client.core.DeeperModule;
 
 /**
  * Mapping beetween mvp4g modules and hisotry tokens (event names). Contains all
@@ -12,28 +12,13 @@ import com.github.goonjja.gweetie.demo.client.child.SubModule2;
  * 
  */
 public enum Places implements GweetiePlace {
-	Home(Names.ROOT_MODULE, Names.MAIN_PAGE_PLACE),
+	Home("", ""),
 
-	ChildRoot(Names.CHILD_MODULE, Names.CHILD_ROOT_PLACE),
+	Dashboard(DashboardModule.NAME, DashboardModule.MAIN_PAGE),
 
-	ChildView2(Names.CHILD_MODULE2, Names.CHILD_VIEW2_PLACE, new String[] { "param" });
-
-	public static final class Names {
-		private Names() {
-		}
-
-		public final static String ROOT_MODULE = "";
-
-		public final static String CHILD_MODULE = SubModule.NAME;
-
-		public final static String CHILD_MODULE2 = SubModule.NAME + "/" + SubModule2.NAME;
-
-		public final static String MAIN_PAGE_PLACE = "";
-
-		public final static String CHILD_ROOT_PLACE = "root";
-
-		public final static String CHILD_VIEW2_PLACE = "view2";
-	}
+	// it's important to set module name this way, to make history converter
+	// know modules hierarchy
+	Deeper(DashboardModule.NAME + "/" + DeeperModule.NAME, DeeperModule.MAIN_PAGE);
 
 	/*
 	 * --------------------------------------------------------------------------

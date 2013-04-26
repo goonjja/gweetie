@@ -5,13 +5,8 @@
 		
 	</ui:style>
 	<g:HTMLPanel>
-		<div class='container'>
-			<div class='span2' rel='popover' data-placement='bottom' data-content='Popover is here!'
-				data-title='OBEY' data-trigger='hover'>
-				<p>
-					Yep, this is child.
-				</p>
-			</div>
+		<div class='container well'>
+			Welcome to Gweetie Demo's main page.
 		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

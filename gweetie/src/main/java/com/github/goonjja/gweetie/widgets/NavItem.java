@@ -29,6 +29,13 @@ public class NavItem extends Composite implements HasText {
 	public NavItem() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
+	
+	public NavItem(String href, String text, String value) {
+		this();
+		setHref(href);
+		setText(text);
+		setValue(value);
+	}
 
 	public NavItem(String text, String value) {
 		this();
@@ -63,6 +70,14 @@ public class NavItem extends Composite implements HasText {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public String getHref() {
+		return a.getHref();
+	}
+
+	public void setHref(String href) {
+		a.setHref(href);
 	}
 
 	@UiHandler("a")

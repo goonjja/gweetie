@@ -16,7 +16,7 @@ import com.mvp4g.client.Mvp4gModule;
  * @author vedernikov
  * @date 21.09.2012
  */
-public abstract class GweetieEntryPoint implements EntryPoint {
+public abstract class GweetieEntryPoint<T extends GweetieRootEventBus> implements EntryPoint {
 	private Logger log = Logger.getLogger("Gweetie");
 
 	@Override
@@ -31,15 +31,16 @@ public abstract class GweetieEntryPoint implements EntryPoint {
 		startApplication();
 	}
 
+	@SuppressWarnings("unchecked")
 	protected final void startApplication() {
 		Mvp4gModule module = (Mvp4gModule) GWT.create(Mvp4gModule.class);
 		module.createAndStartModule();
 		getRoot().add((Widget) module.getStartView());
 
-		postStart((GweetieRootEventBus) module.getEventBus());
+		postStart((T) module.getEventBus());
 	}
 
 	protected abstract HasWidgets getRoot();
 
-	protected abstract void postStart(GweetieRootEventBus eventBus);
+	protected abstract void postStart(T eventBus);
 }

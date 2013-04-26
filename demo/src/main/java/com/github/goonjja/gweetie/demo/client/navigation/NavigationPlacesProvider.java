@@ -12,6 +12,6 @@ public class NavigationPlacesProvider implements GweetiePlacesProvider {
 
 	@Override
 	public boolean isCrawlable() {
-		return false;
+		return true;
 	}
 }

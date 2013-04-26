@@ -18,12 +18,19 @@ public interface GweetiePlace {
 	 * Utility class that generates hyperlinks for places
 	 */
 	public static class Util {
+
+		public static String getLink(GweetiePlace place) {
+			return getLink(place, false);
+		}
+
 		/**
 		 * Generates link for context(if not present, then root) and place name.
 		 * With slash at the end. Example: root place "Contacts", getLink will
 		 * return #Contacts/
 		 */
-		public static String getLink(GweetiePlace place) {
+		public static String getLink(GweetiePlace place, boolean crawlable) {
+			if (crawlable)
+				return "#!" + getHistoryItemFor(place);
 			return "#" + getHistoryItemFor(place);
 		}
 

@@ -1,5 +1,6 @@
 package com.github.goonjja.gweetie.demo.client.ui;
 
+import com.github.goonjja.gweetie.widgets.Nav;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -22,6 +23,9 @@ public class Header extends Composite {
 	public Anchor headAnchor;
 	@UiField
 	HTMLPanel headerRoot;
+	
+	@UiField
+	Nav nav;
 
 	public Header() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -29,5 +33,9 @@ public class Header extends Composite {
 
 	public Anchor getHeadAnchor() {
 		return headAnchor;
+	}
+	
+	public Nav getNav(){
+		return nav;
 	}
 }
