@@ -3,6 +3,7 @@ package com.github.goonjja.gweetie.demo.client.navigation;
 import com.github.goonjja.gweetie.core.navigation.GweetiePlace;
 import com.github.goonjja.gweetie.demo.client.core.DashboardModule;
 import com.github.goonjja.gweetie.demo.client.core.DeeperModule;
+import com.mvp4g.client.history.PlaceService;
 
 /**
  * Mapping beetween mvp4g modules and hisotry tokens (event names). Contains all
@@ -18,7 +19,7 @@ public enum Places implements GweetiePlace {
 
 	// it's important to set module name this way, to make history converter
 	// know modules hierarchy
-	Deeper(DashboardModule.NAME + "/" + DeeperModule.NAME, DeeperModule.MAIN_PAGE);
+	Deeper(DashboardModule.NAME + PlaceService.MODULE_SEPARATOR + DeeperModule.NAME, DeeperModule.MAIN_PAGE);
 
 	/*
 	 * --------------------------------------------------------------------------

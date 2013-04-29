@@ -1,6 +1,5 @@
 package com.github.goonjja.gweetie.bootstrap;
 
-import com.github.goonjja.gweetie.bootstrap.resources.BootstrapResources;
 import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -9,18 +8,18 @@ import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.dom.client.StyleInjector;
 
 /**
- * Injects bootstrap resources (css, js) to host page
+ * Injects jquery and bootstrap resources (css, js) to host page
  * 
  * @author Ведерников Сергей
  * @date 11.05.2012
  */
 public class ResourceInjector {
 	public static void configure() {
-		injectJs(getBody(), BootstrapResources.INSTANCE.jqueryJs().getText(), true);
-		injectJs(getBody(), BootstrapResources.INSTANCE.bootstrapJs().getText(), true);
-		StyleInjector.inject(BootstrapResources.INSTANCE.bootstrapCss().getText());
-		StyleInjector.inject(BootstrapResources.INSTANCE.bootstrapResponsiveCss().getText());
-		StyleInjector.inject(BootstrapResources.INSTANCE.navBarFixCss().getText());
+		injectJs(getBody(), Resources.INSTANCE.jqueryJs().getText(), true);
+		injectJs(getBody(), Resources.INSTANCE.bootstrapJs().getText(), true);
+		StyleInjector.inject(Resources.INSTANCE.bootstrapCss().getText());
+		StyleInjector.inject(Resources.INSTANCE.bootstrapResponsiveCss().getText());
+		StyleInjector.inject(Resources.INSTANCE.navBarFixCss().getText());
 	}
 
 	private static void injectJs(Element container, String javascript, boolean insertFirst) {
