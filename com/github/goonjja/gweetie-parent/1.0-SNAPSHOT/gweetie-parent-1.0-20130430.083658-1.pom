@@ -139,7 +139,6 @@
 					</includes>
 					<repositoryName>gweetie</repositoryName>      <!-- github repo name -->
 					<repositoryOwner>goonjja</repositoryOwner>    <!-- github username -->
-					<path>gweetie-parent</path>
 				</configuration>
 				<executions>
 					<!-- run site-maven-plugin's 'site' target as part of the build's normal 
