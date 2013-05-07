@@ -15,9 +15,6 @@
 
 	<properties>
 		<gwtVersion>2.5.1</gwtVersion>
-		<!-- GWT needs at least java 1.6 -->
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
 	</properties>
 
 	<dependencies>
